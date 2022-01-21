@@ -52,8 +52,8 @@ public class Main {
 		System.out.println(sn);
 		for(int i=0; i<sn; i++) {
 			int idx = (int)(Math.random()*4);
-			if(idx < 2) current.addLast(new Node("-", options[idx], (int)(Math.random()*(ry+1))+oy));
-			else current.addLast(new Node("-", (int)(Math.random()*(rx+1))+ox, options[idx]));
+			if(idx < 2) current.addLast(new Node("-", options[idx], (int)(Math.random()*(ry-oy+1))+oy));
+			else current.addLast(new Node("-", (int)(Math.random()*(rx-ox+1))+ox, options[idx]));
 		}
 	}
 
