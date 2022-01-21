@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class bogopathfinding {
+public class Main {
 	
 	private static Node[][] map;
 	private static ArrayDeque<Node> current = new ArrayDeque<>();
@@ -29,16 +29,16 @@ public class bogopathfinding {
 		while(!current.isEmpty()) {
 			for(int i=0; i<current.size(); i++) {
 				Node n = current.removeFirst();
-				n.value = 1;
+				n.value = "*";
 				int xOff = (int)(Math.random()*2);
 				int yOff = (int)(Math.random()*2);
 				map[n.x][n.y] = n;
 				int x = map.length, y = map[0].length;
 				if(n.x == x/2 && n.y == y/2) continue;
-				if(n.x <= x/2 && n.y <= y/2) current.addLast(new Node(0, n.x+xOff, n.y+yOff));
-				else if(n.x <= x/2 && n.y >= y/2) current.addLast(new Node(0, n.x+xOff, n.y-yOff));
-				else if(n.x >= x/2 && n.y >= y/2) current.addLast(new Node(0, n.x-xOff, n.y-yOff));
-				else if(n.x >= x/2 && n.y <= y/2) current.addLast(new Node(0, n.x-xOff, n.y+yOff));
+				if(n.x <= x/2 && n.y <= y/2) current.addLast(new Node("-", n.x+xOff, n.y+yOff));
+				else if(n.x <= x/2 && n.y >= y/2) current.addLast(new Node("-", n.x+xOff, n.y-yOff));
+				else if(n.x >= x/2 && n.y >= y/2) current.addLast(new Node("-", n.x-xOff, n.y-yOff));
+				else if(n.x >= x/2 && n.y <= y/2) current.addLast(new Node("-", n.x-xOff, n.y+yOff));
 				else continue;
 			}
 		}
@@ -47,15 +47,19 @@ public class bogopathfinding {
 	}
 
 	static void addStartNodes(int ox, int rx, int oy, int ry) {
-		current.addLast(new Node(0, ox, (int)(Math.random()*(ry+1))+oy));
-		current.addLast(new Node(0, rx, (int)(Math.random()*(ry+1))+oy));
-		current.addLast(new Node(0, oy, (int)(Math.random()*(rx+1))+ox));
-		current.addLast(new Node(0, ry, (int)(Math.random()*(rx+1))+ox));
+		int[] options = {ox, rx, oy, ry};
+		int sn = (int)(((map.length+map[0].length)/2)*2.5);
+		System.out.println(sn);
+		for(int i=0; i<sn; i++) {
+			int idx = (int)(Math.random()*4);
+			if(idx < 2) current.addLast(new Node("-", options[idx], (int)(Math.random()*(ry+1))+oy));
+			else current.addLast(new Node("-", (int)(Math.random()*(rx+1))+ox, options[idx]));
+		}
 	}
 
 	static void printMap() {
 		for(Node[] a : map) {
-			for(Node b : a) System.out.print(b != null ? b.value + " ": "0 ");
+			for(Node b : a) System.out.print(b != null ? b.value : "-");
 			System.out.println();
 		}
 	}
@@ -63,9 +67,9 @@ public class bogopathfinding {
 }
 
 class Node {
-	public int value;
+	public String value;
 	public int x, y;
-	public Node(int v, int x, int y) { 
+	public Node(String v, int x, int y) { 
 		this.value=v;
 		this.x=x;
 		this.y=y;
