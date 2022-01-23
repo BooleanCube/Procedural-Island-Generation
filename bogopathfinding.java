@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class bogopathfinding {
 	
 	private static Node[][] map;
 	private static ArrayDeque<Node> current = new ArrayDeque<>();
@@ -11,6 +11,11 @@ public class Main {
 		//input map sizes:
 		int x = Integer.parseInt(bf.readLine());
 		int y = Integer.parseInt(bf.readLine());
+    
+    if(x < 20 || y < 20) {
+        System.out.println("The map sizes must be larger than a 20x20. Each side must be larger than 20!");
+        return;
+    }
 
 		map = new Node[x][y];
 		bogoPathfinding();
@@ -46,22 +51,30 @@ public class Main {
 		printMap();
 	}
 
+  //O(n)
 	static void addStartNodes(int ox, int rx, int oy, int ry) {
-		int[] options = {ox, rx, oy, ry};
-		int sn = (int)(((map.length+map[0].length)/2)*2.5);
-		System.out.println(sn);
-		for(int i=0; i<sn; i++) {
-			int idx = (int)(Math.random()*4);
-			if(idx < 2) current.addLast(new Node("-", options[idx], (int)(Math.random()*(ry-oy+1))+oy));
-			else current.addLast(new Node("-", (int)(Math.random()*(rx-ox+1))+ox, options[idx]));
-		}
+    int varianceX = ox/2, varianceY = oy/2;
+		for(int i=ox; i<=rx; i++) {
+      current.addLast(new Node("-", i, oy+(int)(Math.random()*(varianceY*2+1)-varianceY)));
+      current.addLast(new Node("-", i, ry+(int)(Math.random()*(varianceY*2+1)-varianceY)));
+    }
+    for(int i=oy; i<=ry; i++) {
+      current.addLast(new Node("-", ox+(int)(Math.random()*(varianceX*2+1)-varianceX), i));
+      current.addLast(new Node("-", rx+(int)(Math.random()*(varianceX*2+1)-varianceX), i));
+    }
 	}
 
+  //O(1)
 	static void printMap() {
+    StringBuilder sb = new StringBuilder();
 		for(Node[] a : map) {
-			for(Node b : a) System.out.print(b != null ? b.value : "-");
-			System.out.println();
+			for(Node b : a) {
+        if(b != null) sb.append(b.value);
+        else sb.append("-");
+      }
+			sb.append("\n");
 		}
+    System.out.println(sb.toString());
 	}
 
 }
