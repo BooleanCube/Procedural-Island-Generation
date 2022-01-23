@@ -30,7 +30,7 @@ public class bogopathfinding {
 		
 		addStartNodes(offsetX, radiusX, offsetY, radiusY);
 
-		//O(1)
+		//O(n)
 		while(!current.isEmpty()) {
 			for(int i=0; i<current.size(); i++) {
 				Node n = current.removeFirst();
