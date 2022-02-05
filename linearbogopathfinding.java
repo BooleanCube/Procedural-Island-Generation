@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
 
+//fastest island river generator
+
 public class linearbogopathfinding {
 	
     //generation
@@ -39,9 +41,9 @@ public class linearbogopathfinding {
 
 		//whole nested loop O(v+e)
 		while(!current.isEmpty()) {
-		//O(1) because current.size is constant
-		//iterations not counted because loop is O(1)
+			//O(1) because current.size is constant
 			for(int i=0; i<current.size(); i++) {
+				++iterationCounter;
 				Node n = current.removeFirst();
 				n.value = "*";
 				int xOff = (int)(Math.random()*2);
@@ -55,7 +57,6 @@ public class linearbogopathfinding {
 				else if(n.x >= x/2 && n.y <= y/2) current.addLast(new Node("-", n.x-xOff, n.y+yOff));
 				else continue;
 			}
-			++iterationCounter;
 		}
 
 		printMap();
