@@ -3,36 +3,32 @@ import java.util.*;
 
 //there are no rivers in this proc gen method.
 
-public class bruteforce {
+public class outwardexpansion {
     //statistics
     private static int iterationCounter = 0;
     private static long startTime = 0;
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(bf.readLine());
-        double r = 5.71428571429d;
+        int x = Integer.parseInt(bf.readLine()), y = Integer.parseInt(bf.readLine());
+        int cx = x/2, cy = y/2;
+        double rx = (x*0.8)/2.0;
+        double ry = (y*0.8)/2.0;
         startTime = System.currentTimeMillis();
-        Node[][] map = new Node[n][n];
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
+        Node[][] map = new Node[x][y];
+        for(int i=0; i<rx; i++) {
+            for(int j=0; j<ry; j++) {
                 ++iterationCounter;
-                map[i][j] = new Node('-');
-                if (j>(n/2)-(n/r/2) && j < (n/2)+(n/r/2) && (i > (n/2)-(n/r/2) && i < (n/2)+(n/r/2))) {
-                    int rand1 = (int)(Math.random()*100)+1;
-                    int dist = (Math.abs(j-n/2)+Math.abs(i-n/2))/2;
-                    if (rand1 >= 10+dist) map[i][j].value = '*';
-                }
-                else if (j > (n/2)-(n/4/2) && j < (n/2)+(n/4/2) && (i > (n/2)-(n/4/2) && i < (n/2)+(n/4/2))) {
-                    int rand1 = (int)(Math.random()*100)+1;
-                    if (rand1 > 65) map[i][j].value = '*';
-                }
+                if(Math.random()>0.19) map[cx+i][cy+j] = new Node('*');
+                if(Math.random()>0.19) map[cx-i][cy+j] = new Node('*');
+                if(Math.random()>0.19) map[cx+i][cy-j] = new Node('*');
+                if(Math.random()>0.19) map[cx-i][cy-j] = new Node('*');
             }
         }
         printMap(map);
     }
 
-    //O(1)
+    //O(n)
     static void printMap(Node[][] map) {
         double time = (System.currentTimeMillis()-startTime)/1000.0;
         StringBuilder sb = new StringBuilder();
