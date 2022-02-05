@@ -33,7 +33,7 @@ public class bruteforce {
         printMap(map);
     }
 
-    //O(n)
+    //O(n^2)
     static void printMap(Node[][] map) {
         double time = (System.currentTimeMillis()-startTime)/1000.0;
         StringBuilder sb = new StringBuilder();
