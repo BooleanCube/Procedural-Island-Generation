@@ -14,6 +14,7 @@ public class bruteforce {
         double r = 5.71428571429d;
         startTime = System.currentTimeMillis();
         Node[][] map = new Node[n][n];
+        //O(n^2)
         for(int i=0; i<n; i++) {
             for(int j=0; j<n; j++) {
                 ++iterationCounter;
@@ -32,7 +33,7 @@ public class bruteforce {
         printMap(map);
     }
 
-    //O(1)
+    //O(n)
     static void printMap(Node[][] map) {
         double time = (System.currentTimeMillis()-startTime)/1000.0;
         StringBuilder sb = new StringBuilder();
