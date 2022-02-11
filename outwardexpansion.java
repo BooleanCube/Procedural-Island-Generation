@@ -23,10 +23,10 @@ public class outwardexpansion {
                 double d = Math.sqrt(Math.pow(i,2) + Math.pow(j,2));
                 if(d>=r) continue;
                 double off = d*offC;
-                if(Math.random()>0.19+off) map[c+i][c+j] = new Node('*');
-                if(Math.random()>0.19+off) map[c-i][c+j] = new Node('*');
-                if(Math.random()>0.19+off) map[c+i][c-j] = new Node('*');
-                if(Math.random()>0.19+off) map[c-i][c-j] = new Node('*');
+                if(Math.random()>0.06+off) map[c+i][c+j] = new Node('*');
+                if(Math.random()>0.06+off) map[c-i][c+j] = new Node('*');
+                if(Math.random()>0.06+off) map[c+i][c-j] = new Node('*');
+                if(Math.random()>0.06+off) map[c-i][c-j] = new Node('*');
             }
         }
         printMap(map);
