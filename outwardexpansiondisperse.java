@@ -12,20 +12,20 @@ public class outwardexpansiondisperse {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(bf.readLine());
         int c = n/2;
-        double r = (n*1.0)/2.0;
+        double r = n/2.0;
         startTime = System.currentTimeMillis();
         Node[][] map = new Node[n][n];
-        double offC = 0.08;
+        double offC = 2.4/n;
         for(int i=0; i<r; i++) {
             for(int j=0; j<r; j++) {
                 ++iterationCounter;
                 double d = Math.sqrt(Math.pow(i,2) + Math.pow(j,2));
                 //if(d>=r) continue;
                 double off = d*offC;
-                if(Math.random()>0.06+off) map[c+i][c+j] = new Node('*');
-                if(Math.random()>0.06+off) map[c-i][c+j] = new Node('*');
-                if(Math.random()>0.06+off) map[c+i][c-j] = new Node('*');
-                if(Math.random()>0.06+off) map[c-i][c-j] = new Node('*');
+                if(Math.random()>off) map[c+i][c+j] = new Node('*');
+                if(Math.random()>off) map[c-i][c+j] = new Node('*');
+                if(Math.random()>off) map[c+i][c-j] = new Node('*');
+                if(Math.random()>off) map[c-i][c-j] = new Node('*');
             }
         }
         printMap(map);
