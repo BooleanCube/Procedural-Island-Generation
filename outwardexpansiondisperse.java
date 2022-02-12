@@ -20,7 +20,6 @@ public class outwardexpansiondisperse {
             for(int j=0; j<r; j++) {
                 ++iterationCounter;
                 double d = Math.sqrt(Math.pow(i,2) + Math.pow(j,2));
-                //if(d>=r) continue;
                 double off = d*offC;
                 if(Math.random()>off) map[c+i][c+j] = new Node('*');
                 if(Math.random()>off) map[c-i][c+j] = new Node('*');
