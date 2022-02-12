@@ -17,6 +17,8 @@ public class outwardexpansion {
         Node[][] map = new Node[n][n];
         double offC = 0.0;
         for(int i=0; i<r; i++) {
+            //causes horizontal stretching (this can be used for smaller sized maps)
+            //outwardexpansiondisperse.java fixes this
             offC += 0.005;
             for(int j=0; j<r; j++) {
                 ++iterationCounter;
