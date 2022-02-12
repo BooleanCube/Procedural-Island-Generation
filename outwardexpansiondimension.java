@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 //there are no rivers in this proc gen method.
+//didn't add weird circle math to change shape.
 
 public class outwardexpansion {
     //statistics
