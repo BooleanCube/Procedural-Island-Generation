@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-//there are no rivers in this proc gen method.
+//rivers are not manually generated but can occur coincidentally
 
 public class outwardexpansion {
     //statistics
