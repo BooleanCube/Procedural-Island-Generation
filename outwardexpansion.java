@@ -15,20 +15,17 @@ public class outwardexpansion {
         double r = (n*0.8)/2.0;
         startTime = System.currentTimeMillis();
         Node[][] map = new Node[n][n];
-        double offC = 0.0;
+        double offC = 2.4/n;
         for(int i=0; i<r; i++) {
-            //causes horizontal stretching (this can be used for smaller sized maps)
-            //outwardexpansiondisperse.java fixes this
-            offC += 0.005;
             for(int j=0; j<r; j++) {
                 ++iterationCounter;
                 double d = Math.sqrt(Math.pow(i,2) + Math.pow(j,2));
                 if(d>=r) continue;
                 double off = d*offC;
-                if(Math.random()>0.06+off) map[c+i][c+j] = new Node('*');
-                if(Math.random()>0.06+off) map[c-i][c+j] = new Node('*');
-                if(Math.random()>0.06+off) map[c+i][c-j] = new Node('*');
-                if(Math.random()>0.06+off) map[c-i][c-j] = new Node('*');
+                if(Math.random()>off) map[c+i][c+j] = new Node('*');
+                if(Math.random()>off) map[c-i][c+j] = new Node('*');
+                if(Math.random()>off) map[c+i][c-j] = new Node('*');
+                if(Math.random()>off) map[c-i][c-j] = new Node('*');
             }
         }
         printMap(map);
