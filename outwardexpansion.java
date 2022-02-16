@@ -63,6 +63,11 @@ public class outwardexpansion {
 
     //O(n)
     static void printMap(Node[][] map) {
+        /*
+        * = land
+        # = tree
+        [space] = water
+        */
         double time = (System.currentTimeMillis()-startTime)/1000.0;
         StringBuilder sb = new StringBuilder();
             for(Node[] a : map) {
