@@ -1,12 +1,16 @@
 import java.io.*;
 import java.util.*;
 
-//rivers are not manually generated but can occur coincidentally
+//rivers are not manually generated but they can coincidentally occur
+//keeps the shape more circular with a set radius
 
 public class outwardexpansion {
     //statistics
     private static int iterationCounter = 0;
     private static long startTime = 0;
+
+    //constants
+    static double treeIso = 2;
 
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
@@ -16,16 +20,42 @@ public class outwardexpansion {
         startTime = System.currentTimeMillis();
         Node[][] map = new Node[n][n];
         double offC = 2.4/n;
+        int[] lastTreeX={c,c,c,c}, lastTreeY={c,c,c,c};
         for(int i=0; i<r; i++) {
             for(int j=0; j<r; j++) {
                 ++iterationCounter;
                 double d = Math.sqrt(Math.pow(i,2) + Math.pow(j,2));
                 if(d>=r) continue;
                 double off = d*offC;
-                if(Math.random()>off) map[c+i][c+j] = new Node('*');
-                if(Math.random()>off) map[c-i][c+j] = new Node('*');
-                if(Math.random()>off) map[c+i][c-j] = new Node('*');
-                if(Math.random()>off) map[c-i][c-j] = new Node('*');
+                double treeP = off;
+                if(Math.random()>off) {
+                    map[c+i][c+j] = new Node('*');
+                    if(Math.random()>treeP && (Math.abs(lastTreeX[0]-(c+i))>treeIso && Math.abs(lastTreeY[0]-(c+j))>treeIso)) {
+                        map[c+i][c+j].value = '#';
+                        lastTreeX[0] = c+i; lastTreeY[0] = c+j;
+                    } 
+                }
+                if(Math.random()>off) {
+                    map[c-i][c+j] = new Node('*');
+                    if(Math.random()>treeP && (Math.abs(lastTreeX[1]-(c-i))>treeIso && Math.abs(lastTreeY[1]-(c+j))>treeIso)) {
+                        map[c-i][c+j].value = '#';
+                        lastTreeX[1] = c-i; lastTreeY[1] = c+j;
+                    }
+                }
+                if(Math.random()>off) {
+                    map[c+i][c-j] = new Node('*');
+                    if(Math.random()>treeP && (Math.abs(lastTreeX[2]-(c+i))>treeIso && Math.abs(lastTreeY[2]-(c-j))>treeIso)) {
+                        map[c+i][c-j].value = '#';
+                        lastTreeX[2] = c+i; lastTreeY[2] = c-j;
+                    }
+                }
+                if(Math.random()>off) {
+                    map[c-i][c-j] = new Node('*');
+                    if(Math.random()>treeP && (Math.abs(lastTreeX[3]-(c-i))>treeIso && Math.abs(lastTreeY[3]-(c-j))>treeIso)) {
+                        map[c-i][c-j].value = '#';
+                        lastTreeX[3] = c-i; lastTreeY[3] = c-j;
+                    } 
+                }
             }
         }
         printMap(map);
@@ -38,7 +68,7 @@ public class outwardexpansion {
             for(Node[] a : map) {
                 for(Node b : a) {
                     if(b != null) sb.append(b.value).append(" ");
-                    else sb.append("- ");
+                    else sb.append("  ");
                 }
                 sb.append("\n");
             }
