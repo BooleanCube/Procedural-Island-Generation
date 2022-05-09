@@ -11,6 +11,7 @@ Ranked in terms of runtime:
 Ranked from best looking (imo):
 - Linear Bogo Pathfinding (has proper river generation and island generation and the shape also looks really nice)
 - Outward Expansion (Has an overall amazing shape like the average naturally generated islands)
+- Flood Fill (Looks like the average generated island except with random holes in it)
 - Brute Force (Has a very unnatural feeling to it since we aren't really keeping a track of distance from center in the probabilities)
 
-Credits to Latch for help with Brute Force algorithm
+Credits to Latch for Brute Force algorithm
